@@ -12,6 +12,17 @@ pipeline {
             steps {
               sh "mvn test"
             }
+            post {
+              always {
+                  publishHTML(
+                      target: [
+                          reportDir: 'target/site/jacoco',
+                          reportFiles: 'index.html',
+                          reportName: 'JaCoCo Coverage Report'
+                      ]
+                  )
+              }
+           }
         }   
     }
 }
